@@ -1,12 +1,12 @@
-import http.server
-import socketserver
+from flask import Flask, render_template
+import os
 
-PORT = 8000
+app = Flask(__name__)
 
-Handler = http.server.SimpleHTTPRequestHandler
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print(f"Server running at http://localhost:{PORT}")
-    print("在浏览器中打开上面的链接来查看网站")
-    print("按 Ctrl+C 可以停止服务器")
-    httpd.serve_forever()
+if __name__ == '__main__':
+    # Development server
+    app.run(debug=False, host='0.0.0.0')
