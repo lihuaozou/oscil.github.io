@@ -132,7 +132,7 @@ h2 {
 
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1.5rem;
     margin-top: 1rem;
 }
@@ -140,23 +140,23 @@ h2 {
 .contact-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
     padding: 1rem;
-    background-color: rgba(52, 152, 219, 0.1);
-    border-radius: 10px;
+    background-color: var(--card-background);
+    border-radius: 8px;
     text-decoration: none;
     color: var(--text-color);
-    transition: transform 0.3s ease;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .contact-item:hover {
-    transform: translateY(-3px);
-    background-color: rgba(52, 152, 219, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .contact-icon {
     font-size: 1.5rem;
+    margin-right: 0.75rem;
 }
 
 footer {
