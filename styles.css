@@ -159,11 +159,154 @@ h2 {
     margin-right: 0.75rem;
 }
 
+.main-nav {
+    background-color: var(--card-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.nav-item {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
 footer {
     text-align: center;
     margin-top: 3rem;
     color: var(--primary-color);
     font-size: 0.9rem;
+}
+
+/* 内容样式 */
+.content {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-top: 2rem;
+}
+
+.content h1 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* 照片网格 */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.photo-item {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+    transform: translateY(-5px);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.photo-item p {
+    padding: 1rem;
+    color: var(--text-color);
+}
+
+/* 学习记录 */
+.study-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.study-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 访客留言 */
+.guestbook {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.comment-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.submit-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #2980b9;
 }
 
 @media (max-width: 768px) {
@@ -187,5 +330,35 @@ footer {
     .skills-grid,
     .contact-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .nav-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem;
+    }
+    
+    .nav-item {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .content {
+        padding: 1rem;
+    }
+    
+    .photo-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem;
+    }
+    
+    .nav-item {
+        width: 100%;
+        text-align: center;
     }
 }
