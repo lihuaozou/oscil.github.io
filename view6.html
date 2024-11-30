@@ -50,8 +50,12 @@
             const repo = 'oscil.github.io';
             
             try {
-                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues?labels=comment&state=open`);
+                // 移除 labels 过滤，获取所有 issues
+                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues?state=all`);
                 const issues = await response.json();
+
+                // 添加调试信息
+                console.log('API Response:', issues);
 
                 if (!Array.isArray(issues) || issues.length === 0) {
                     commentsList.innerHTML = '<div class="no-comments">还没有留言，来做第一个留言的人吧！</div>';
@@ -88,12 +92,19 @@
                 });
             } catch (error) {
                 console.error('Error loading comments:', error);
-                commentsList.innerHTML = '<div class="error">加载留言失败，请刷新页面重试。</div>';
+                commentsList.innerHTML = `<div class="error">加载留言失败：${error.message}</div>`;
             }
         }
 
         // 页面加载时加载留言
         document.addEventListener('DOMContentLoaded', loadComments);
+
+        // 添加刷新按钮
+        const refreshButton = document.createElement('button');
+        refreshButton.textContent = '刷新留言';
+        refreshButton.className = 'refresh-btn';
+        refreshButton.onclick = loadComments;
+        document.querySelector('.comment-instructions').appendChild(refreshButton);
     </script>
 </body>
 </html>

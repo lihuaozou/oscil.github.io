@@ -419,6 +419,28 @@ footer {
     color: #e74c3c;
 }
 
+.refresh-btn {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.refresh-btn:active {
+    transform: translateY(0);
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
