@@ -24,19 +24,16 @@
             <section class="content">
                 <h1>访客留言</h1>
                 <div class="guestbook">
-                    <form class="comment-form" action="#" method="POST">
-                        <div class="form-group">
-                            <label for="name">昵称：</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">留言：</label>
-                            <textarea id="message" name="message" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">提交留言</button>
-                    </form>
-                    <div class="comments">
-                        <!-- 留言将在这里显示 -->
+                    <div class="comment-instructions">
+                        <p>欢迎在这里留下你的想法！点击下方按钮前往 GitHub 留言：</p>
+                        <a href="https://github.com/lihuaozou/oscil.github.io/issues/new?labels=comment&title=访客留言" 
+                           class="github-comment-btn" 
+                           target="_blank">
+                            写留言
+                        </a>
+                    </div>
+                    <div class="comments" id="commentsList">
+                        <div class="loading">加载留言中...</div>
                     </div>
                 </div>
             </section>
@@ -45,5 +42,58 @@
             <p>&copy; 2024 oscil. All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        async function loadComments() {
+            const commentsList = document.getElementById('commentsList');
+            const owner = 'lihuaozou';
+            const repo = 'oscil.github.io';
+            
+            try {
+                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues?labels=comment&state=open`);
+                const issues = await response.json();
+
+                if (!Array.isArray(issues) || issues.length === 0) {
+                    commentsList.innerHTML = '<div class="no-comments">还没有留言，来做第一个留言的人吧！</div>';
+                    return;
+                }
+
+                commentsList.innerHTML = '';
+                issues.forEach(issue => {
+                    const date = new Date(issue.created_at);
+                    const formattedDate = date.toLocaleDateString('zh-CN', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+
+                    const commentElement = document.createElement('div');
+                    commentElement.className = 'comment-item';
+                    commentElement.innerHTML = `
+                        <div class="comment-header">
+                            <div class="comment-author">
+                                <img src="${issue.user.avatar_url}" alt="${issue.user.login}" class="author-avatar">
+                                <span>${issue.user.login}</span>
+                            </div>
+                            <span class="comment-date">${formattedDate}</span>
+                        </div>
+                        <div class="comment-content">${issue.body}</div>
+                        <div class="comment-footer">
+                            <a href="${issue.html_url}" target="_blank" class="view-on-github">在 GitHub 上查看</a>
+                        </div>
+                    `;
+                    commentsList.appendChild(commentElement);
+                });
+            } catch (error) {
+                console.error('Error loading comments:', error);
+                commentsList.innerHTML = '<div class="error">加载留言失败，请刷新页面重试。</div>';
+            }
+        }
+
+        // 页面加载时加载留言
+        document.addEventListener('DOMContentLoaded', loadComments);
+    </script>
 </body>
 </html>
